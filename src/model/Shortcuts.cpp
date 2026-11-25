@@ -29,7 +29,7 @@ std::string map_key(const std::string& key) {
         {"Return", "Enter"},{"Escape", "Esc"},
         {"Left", "\u2190"}, {"Right", "\u2192"}, {"Up", "\u2191"}, {"Down", "\u2193"},
         {"Delete", "Del"},  {"BackSpace", "Backspace"},
-        {"Page_Up", "Page Up"}, {"Page_Down", "Page Down"},
+        {"Page_Up", "Page Up"}, {"bracketleft", "["}, {"bracketright", "]"}, {"Page_Down", "Page Down"},
         {"KP_Add", "Keypad +"}, {"KP_Subtract", "Keypad \u2212"}, {"KP_0", "Keypad 0"},
     };
     auto it = named.find(key);
@@ -111,6 +111,14 @@ const std::vector<ShortcutSpec>& shortcut_registry() {
         {"Diagnostics", "win.dump-registry", {"<Ctrl>d"}, "",
          "Dump the widget registry to the log"},
 
+        // ── Edit ──────────────────────────────────────────────────────────────
+        // Doc-only on purpose: Ctrl+Z as an accelerator would take undo away
+        // from every text box (jot s046a). The window hears these keys in the
+        // bubble phase instead (Shell::on_key).
+        {"Edit", "", {}, "Ctrl+Z", "Undo the last choice (type, resolution, a correction, the crop)"},
+        {"Edit", "", {}, "Ctrl+Shift+Z  /  Ctrl+Y", "Redo"},
+        {"Edit", "", {}, "Esc", "Cancel a crop drag in progress"},
+
         // ── General ───────────────────────────────────────────────────────────
         {"General", "win.shortcuts",     {"<Ctrl>question", "<Ctrl>slash"}, "",
          "Keyboard shortcuts (this window)"},
@@ -119,11 +127,15 @@ const std::vector<ShortcutSpec>& shortcut_registry() {
 
         // ── Mouse ─────────────────────────────────────────────────────────────
         // Doc-only: a gesture is not a GAction, but the reader still needs it.
-        {"Mouse", "", {}, "Click the orb", "Scan the page on the glass"},
+        {"Mouse", "", {}, "Click the orb", "Scan what is inside the crop box"},
+        {"Mouse", "", {}, "Drag on the glass", "Draw a crop box; drag inside it to move it, at an edge to size it"},
 
         // ── Scan ──────────────────────────────────────────────────────────────
         {"Scan", "win.scan",         {"<Ctrl>Return"}, "", "Scan the page on the glass"},
-        {"Scan", "win.scan-stop",    {"<Ctrl>period"}, "", "Stop the scan"},
+        {"Scan", "win.preview",      {"<Ctrl>p"},      "", "Preview the glass: find the page, suggest crop + type"},
+        {"Scan", "win.rotate-left",  {"<Ctrl>bracketleft"},  "", "Turn the scanned page 90 degrees left"},
+        {"Scan", "win.rotate-right", {"<Ctrl>bracketright"}, "", "Turn the scanned page 90 degrees right"},
+        {"Scan", "win.scan-stop",    {"<Ctrl>period"}, "", "Stop the scan (and continuous scanning)"},
         {"Scan", "win.open-folder",  {"<Ctrl>o"},      "", "Open the folder the scans go to"},
         {"Scan", "win.find-scanner", {"<Ctrl>r"},      "", "Look for the scanner again"},
     };

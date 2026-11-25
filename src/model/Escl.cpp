@@ -1,6 +1,7 @@
 #include "model/Escl.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 
@@ -124,7 +125,28 @@ Source parse_source(std::string_view section) {
     return s;
 }
 
+Range parse_range(std::string_view section) {
+    Range r;
+    if (section.empty()) return r;
+    r.min    = number(section, "Min");
+    r.max    = number(section, "Max");
+    r.normal = number(section, "Normal");
+    r.step   = std::max(1, number(section, "Step"));
+    r.present = r.max > r.min;
+    if (r.present) r.normal = std::clamp(r.normal, r.min, r.max);
+    return r;
+}
+
 }  // namespace
+
+int correction_value(const Range& r, int rel) {
+    if (!r.present) return r.normal;
+    rel = std::clamp(rel, -50, 50);
+    double v = rel >= 0 ? r.normal + (r.max - r.normal) * (rel / 50.0)
+                        : r.normal + (r.normal - r.min) * (rel / 50.0);
+    int snapped = r.min + static_cast<int>(std::lround((v - r.min) / r.step)) * r.step;
+    return std::clamp(snapped, r.min, r.max);
+}
 
 const char* mode_escl(Mode m) {
     switch (m) {
@@ -155,6 +177,9 @@ bool parse_caps(std::string_view xml, Caps& out, std::string* err) {
     out.uuid       = text(xml, "UUID");
     out.platen = parse_source(element(xml, "PlatenInputCaps"));
     out.adf    = parse_source(element(xml, "AdfSimplexInputCaps"));
+    out.brightness = parse_range(element(xml, "BrightnessSupport"));
+    out.contrast   = parse_range(element(xml, "ContrastSupport"));
+    out.sharpen    = parse_range(element(xml, "SharpenSupport"));
     if (!out.platen.present) {
         if (err) *err = "no platen (flatbed) in the capabilities";
         return false;
@@ -228,6 +253,9 @@ std::string build_scan_settings(const Settings& s) {
     x += "  <scan:ColorMode>" + std::string(mode_escl(s.mode)) + "</scan:ColorMode>\n";
     x += "  <scan:XResolution>" + n(s.dpi) + "</scan:XResolution>\n";
     x += "  <scan:YResolution>" + n(s.dpi) + "</scan:YResolution>\n";
+    if (s.brightness) x += "  <scan:Brightness>" + n(*s.brightness) + "</scan:Brightness>\n";
+    if (s.contrast)   x += "  <scan:Contrast>" + n(*s.contrast) + "</scan:Contrast>\n";
+    if (s.sharpen)    x += "  <scan:Sharpen>" + n(*s.sharpen) + "</scan:Sharpen>\n";
     x += "</scan:ScanSettings>\n";
     return x;
 }

@@ -8,6 +8,12 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
+# Warnings on everywhere: s002 shipped a constexpr copy of a std::string that
+# GCC 13/14 let through and GCC 16 (Fedora) refused. Built clean with these on
+# under GCC 13, GCC 14 and clang 18.
+# C++ only: the generated gresource C file trips -Woverlength-strings.
+add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Wpedantic>")
+
 # Deps -- Fedora: gtkmm4.0-devel spdlog-devel libsoup3-devel avahi-devel cmake gcc-c++
 #         Ubuntu: libgtkmm-4.0-dev libspdlog-dev libsoup-3.0-dev libavahi-client-dev cmake g++
 find_package(PkgConfig REQUIRED)
@@ -25,6 +31,10 @@ add_library(scanit_model STATIC
     src/model/Escl.cpp
     # Where a scan lands and what it is called.
     src/model/Output.cpp
+    # What the next scan sends: quick settings + crop, through the undo door.
+    src/model/Plan.cpp
+    # Reading the preview: content box, pages, orientation, size, best type.
+    src/model/Detect.cpp
     # The look (from Cairn s002): page states, the sidebar as data, tints.
     src/model/Look.cpp
     # The SHORTCUT-REGISTRY paradigm: one list, two consumers (App wires accels,
@@ -80,6 +90,8 @@ add_executable(scanit
     src/Appearance.cpp
     src/Look.cpp
     src/Shell.cpp
+    src/CropView.cpp
+    src/Rotate.cpp
     src/Shell_zones.cpp
     src/Shell_bindings.cpp
     src/Shell_handlers.cpp

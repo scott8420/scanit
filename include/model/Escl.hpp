@@ -16,6 +16,7 @@
 // keeps them that way and converts only for display. Everything here is a
 // pure function, so the selftest walks it headless. io/Escl* does the HTTP.
 
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -39,13 +40,27 @@ struct Source {
     std::vector<std::string> formats;       // "image/jpeg", "application/pdf", ...
 };
 
+// A scanner-side adjustment (eSCL 2.6 BrightnessSupport / ContrastSupport /
+// SharpenSupport): its range and the value that means "untouched".
+struct Range {
+    bool present = false;
+    int  min = 0, max = 0, normal = 0, step = 1;
+};
+
 struct Caps {
     std::string version;        // pwg:Version, e.g. "2.63"
     std::string make_model;     // "EPSON ET-8550 Series"
     std::string uuid;
     Source platen;
     Source adf;
+    Range  brightness;          // absent on scanners that do not list it
+    Range  contrast;
+    Range  sharpen;
 };
+
+// A correction as Scanit holds it -- -50..+50 around the scanner's normal --
+// onto the scanner's own range, snapped to its step. 0 -> normal.
+int correction_value(const Range& r, int rel);
 
 // Parse ScannerCapabilities. On failure returns false and says why in *err.
 bool parse_caps(std::string_view xml, Caps& out, std::string* err = nullptr);
@@ -80,6 +95,11 @@ struct Settings {
     int         dpi     = 300;
     Region      region;
     std::string format  = "image/jpeg";
+    // Scanner-side corrections; sent only when set (and so only when the
+    // scanner listed the matching *Support). Values in the scanner's range.
+    std::optional<int> brightness;
+    std::optional<int> contrast;
+    std::optional<int> sharpen;
 };
 
 std::string build_scan_settings(const Settings& s);

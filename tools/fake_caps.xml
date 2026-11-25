@@ -48,4 +48,6 @@
       </scan:SettingProfile></scan:SettingProfiles>
     </scan:AdfSimplexInputCaps>
   </scan:Adf>
+  <scan:BrightnessSupport><scan:Min>-100</scan:Min><scan:Max>100</scan:Max><scan:Normal>0</scan:Normal><scan:Step>1</scan:Step></scan:BrightnessSupport>
+  <scan:ContrastSupport><scan:Min>-100</scan:Min><scan:Max>100</scan:Max><scan:Normal>0</scan:Normal><scan:Step>1</scan:Step></scan:ContrastSupport>
 </scan:ScannerCapabilities>
