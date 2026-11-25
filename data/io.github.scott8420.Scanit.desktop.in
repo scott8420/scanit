@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Scanit
+GenericName=Book Scanner
+Comment=Scan whole books on an AirScan (eSCL) flatbed
+Exec=@EXEC@
+Icon=io.github.scott8420.Scanit
+Terminal=false
+Categories=Graphics;Scanning;
+Keywords=scan;scanner;book;epson;escl;airscan;
+StartupNotify=true
+StartupWMClass=io.github.scott8420.Scanit

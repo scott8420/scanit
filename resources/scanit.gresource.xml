@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Scanit resource bundle. The resource-pipeline paradigm: an app asset carried
+     the symbolic way (a currentColor SVG under the freedesktop icon-theme shape)
+     so set_icon_name("scanit-logo-symbolic") resolves it out of the compiled-in
+     binary and GTK recolours it to the theme foreground -- no icon installed on
+     the user's disk.
+
+     Gotcha the shape encodes: GTK's icon lookup is RIGID about the trailing
+     .../scalable/apps/ path, so the prefix ends there and App::on_activate
+     passes only /io/github/scott8420/Scanit/icons to add_resource_path (GTK appends
+     scalable/apps/ itself). The prefix mirrors the app-id; both move together in
+     a one-pass rename. See docs/resources-and-dialog-lifetime.md. -->
+<gresources>
+  <gresource prefix="/io/github/scott8420/Scanit/icons/scalable/apps">
+    <file preprocess="xml-stripblanks" alias="scanit-logo-symbolic.svg">icons/scalable/apps/scanit-logo-symbolic.svg</file>
+    <!-- The look (Cairn s002): full-colour hero emblems, not symbolic. -->
+    <file preprocess="xml-stripblanks" alias="scanit-hero-scan.svg">icons/scalable/apps/scanit-hero-scan.svg</file>
+    <file preprocess="xml-stripblanks" alias="scanit-hero-scanner.svg">icons/scalable/apps/scanit-hero-scanner.svg</file>
+    <file preprocess="xml-stripblanks" alias="scanit-hero-done.svg">icons/scalable/apps/scanit-hero-done.svg</file>
+  </gresource>
+  <!-- The look's skin, loaded by look::install() when the look is on. -->
+  <gresource prefix="/io/github/scott8420/Scanit">
+    <file>look.css</file>
+  </gresource>
+</gresources>

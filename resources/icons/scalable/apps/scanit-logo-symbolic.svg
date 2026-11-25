@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <!-- placeholder until the Curvz logo: an open book under a scan line -->
+  <path fill="#2e3436" d="M1 4.2 Q4 3 7.5 4.4 V13 Q4 11.8 1 12.8 Z M15 4.2 Q12 3 8.5 4.4 V13 Q12 11.8 15 12.8 Z"/>
+  <rect fill="#2e3436" x="0" y="8" width="16" height="1.2" rx="0.6"/>
+</svg>

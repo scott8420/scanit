@@ -1,0 +1,259 @@
+/* The look: Rouster's skin as a Scanit stone (s002). Dark, always: a deep
+   gradient per page, a frosted sidebar with section headers, a hero on each
+   page, one big round action (the orb), results as cards. Every rule hangs
+   off window.look, so a window that did not ask is untouched.
+   Plain GTK4 CSS: no libadwaita, no var() (GTK 4.14 lacks it), and no double
+   hyphen inside a comment (the selftest checks). docs/the-look.md. */
+
+/* The window: the page gradient runs under a transparent titlebar. */
+window.look { background-color: #1b1530; color: #f4f1fb; }
+window.look headerbar {
+  background: transparent; box-shadow: none; border: none;
+  min-height: 40px; color: #f4f1fb;
+}
+window.look headerbar button, window.look headerbar menubutton > button {
+  color: rgba(244,241,251,0.85); background: transparent; box-shadow: none; border: none;
+}
+window.look headerbar menubutton > button:checked { background-color: rgba(255,255,255,0.14); }
+window.look headerbar button:hover { background-color: rgba(255,255,255,0.10); }
+window.look .title { font-weight: 600; color: rgba(244,241,251,0.75); }
+
+/* Sidebar: frosted, icon + label rows, a soft pill for the selection. */
+window.look .sidebar-pane { background-color: rgba(0,0,0,0.22); border-right: 1px solid rgba(255,255,255,0.06); }
+window.look .sidebar-pane list { background: transparent; }
+window.look .sidebar-pane row {
+  border-radius: 10px; margin: 2px 10px; padding: 8px 10px;
+  color: rgba(244,241,251,0.80); background: transparent;
+}
+window.look .sidebar-pane row:hover { background-color: rgba(255,255,255,0.07); }
+window.look .sidebar-pane row.section-row:hover { background: transparent; }
+window.look .sidebar-pane row:selected { background-color: rgba(255,255,255,0.16); color: #ffffff; }
+window.look .sidebar-pane row:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: -2px; }
+window.look .sidebar-section {
+  font-size: 0.78em; font-weight: 700; letter-spacing: 1px;
+  color: rgba(244,241,251,0.45); margin: 14px 12px 4px 12px;
+}
+window.look .sidebar-brand { font-size: 1.15em; font-weight: 800; margin: 6px 20px 8px 20px; }
+
+/* Hero: the centred landing of each page. */
+window.look .hero-title { font-size: 2.1em; font-weight: 800; color: #ffffff; }
+window.look .hero-sub { font-size: 1.05em; color: rgba(244,241,251,0.72); }
+window.look .hero-big { font-size: 3.2em; font-weight: 800; color: #ffffff; }
+window.look .hero-caption { font-size: 1.0em; color: rgba(244,241,251,0.70); }
+
+/* The one big round action. Its colours come from the tint (below). */
+window.look button.orb {
+  min-width: 104px; min-height: 104px; border-radius: 9999px; padding: 0;
+  font-size: 1.25em; font-weight: 700; color: #ffffff; border: none;
+  background-image: linear-gradient(160deg, #ff6fb5 0%, #c43fd6 55%, #7a3cf0 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(232,76,166,0.55);
+}
+window.look button.orb:hover { box-shadow: 0 0 0 9px rgba(255,255,255,0.16), 0 12px 48px rgba(255,255,255,0.20); }
+window.look button.orb:active { opacity: 0.85; }
+window.look button.orb:disabled { opacity: 0.45; }
+
+/* Quiet secondary buttons on the dark ground. */
+window.look button.ghost {
+  border-radius: 9999px; padding: 6px 18px; border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06); color: #ffffff; box-shadow: none;
+}
+window.look button.ghost:hover { background: rgba(255,255,255,0.14); }
+window.look button.ghost:disabled { opacity: 0.4; }
+window.look button.ghost.small { padding: 2px 12px; font-size: 0.88em; min-height: 0; }
+window.look button.ghost.mode:checked { background: rgba(255,255,255,0.24); border-color: rgba(255,255,255,0.55); }
+
+/* The act bar pinned under a results list, and its button. */
+window.look .act-bar {
+  background-color: rgba(0,0,0,0.28); border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 32px;
+}
+window.look button.act {
+  border-radius: 9999px; padding: 8px 22px; font-weight: 700; color: #ffffff; border: none;
+  background-image: linear-gradient(160deg, #4ade80 0%, #16a34a 100%);
+}
+window.look button.act:hover { opacity: 0.92; }
+window.look button.act:disabled { opacity: 0.4; box-shadow: none; }
+
+/* Cards. */
+window.look .card {
+  background-color: rgba(255,255,255,0.08); border-radius: 16px; padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+window.look .card:hover { background-color: rgba(255,255,255,0.12); }
+window.look flowboxchild, window.look flowboxchild:selected, window.look flowboxchild:hover {
+  padding: 0; border-radius: 16px; background: transparent; outline: none;
+}
+window.look flowboxchild:focus-visible .card { border-color: rgba(255,255,255,0.45); }
+window.look flowboxchild:selected .card, window.look .card.selected {
+  background-color: rgba(255,255,255,0.20); border-color: rgba(255,255,255,0.30);
+}
+window.look .card-title { font-weight: 700; font-size: 1.0em; color: #ffffff; }
+window.look .card-big { font-size: 1.6em; font-weight: 800; color: #ffffff; }
+window.look .card-sub { font-size: 0.88em; color: rgba(244,241,251,0.65); }
+
+/* Dots, the detail list, status. */
+window.look .dot { min-width: 12px; min-height: 12px; border-radius: 9999px; background-color: #94a3b8; }
+window.look .detail { background-color: rgba(0,0,0,0.18); border-radius: 14px; padding: 10px 14px; }
+window.look .dim { color: rgba(244,241,251,0.60); }
+window.look .status-chip {
+  border-radius: 9999px; padding: 2px 10px; font-size: 0.8em; font-weight: 700;
+  background-color: rgba(255,255,255,0.10);
+}
+window.look .ok   { color: #4ade80; }
+window.look .note { color: #fbbf24; }
+window.look .stop { color: #f87171; }
+
+/* The running state's big spinner; stock lists frost on the gradient. */
+window.look spinner.big { min-width: 64px; min-height: 64px; color: #ffffff; }
+window.look scrolledwindow, window.look viewport { background: transparent; }
+window.look list { background: transparent; }
+window.look entry { background-color: rgba(0,0,0,0.25); color: #ffffff; border-radius: 8px; }
+window.look expander title { color: #ffffff; }
+
+/* The tints: three rules each: the window gradient, the orb, the act
+   button. Add one: three rules here AND its name in core::look::tints();
+   the selftest fails until both agree. */
+window.look.tint-magenta {
+  background-image: radial-gradient(circle at 75% 15%, rgba(232,76,166,0.50), transparent 55%),
+                    linear-gradient(160deg, #3a1d6e 0%, #5b1f6b 55%, #2a1446 100%);
+}
+window.look.tint-magenta button.orb {
+  background-image: linear-gradient(160deg, #ff6fb5 0%, #c43fd6 55%, #7a3cf0 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(232,76,166,0.50);
+}
+window.look.tint-magenta button.act {
+  background-image: linear-gradient(160deg, #f472b6 0%, #c026d3 100%);
+  box-shadow: 0 6px 22px rgba(232,76,166,0.35);
+}
+window.look.tint-green {
+  background-image: radial-gradient(circle at 75% 15%, rgba(74,222,128,0.50), transparent 55%),
+                    linear-gradient(160deg, #0f3d2e 0%, #14532d 55%, #0b2a1f 100%);
+}
+window.look.tint-green button.orb {
+  background-image: linear-gradient(160deg, #86efac 0%, #22c55e 55%, #047857 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(74,222,128,0.50);
+}
+window.look.tint-green button.act {
+  background-image: linear-gradient(160deg, #4ade80 0%, #16a34a 100%);
+  box-shadow: 0 6px 22px rgba(74,222,128,0.35);
+}
+window.look.tint-orange {
+  background-image: radial-gradient(circle at 75% 15%, rgba(251,146,60,0.50), transparent 55%),
+                    linear-gradient(160deg, #4a2511 0%, #6b2f12 55%, #2e160b 100%);
+}
+window.look.tint-orange button.orb {
+  background-image: linear-gradient(160deg, #fdba74 0%, #f97316 55%, #b45309 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(251,146,60,0.50);
+}
+window.look.tint-orange button.act {
+  background-image: linear-gradient(160deg, #fdba74 0%, #ea580c 100%);
+  box-shadow: 0 6px 22px rgba(251,146,60,0.35);
+}
+window.look.tint-sky {
+  background-image: radial-gradient(circle at 75% 15%, rgba(56,189,248,0.50), transparent 55%),
+                    linear-gradient(160deg, #0c2f4a 0%, #0e4a6e 55%, #0a2236 100%);
+}
+window.look.tint-sky button.orb {
+  background-image: linear-gradient(160deg, #7dd3fc 0%, #0ea5e9 55%, #0369a1 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(56,189,248,0.50);
+}
+window.look.tint-sky button.act {
+  background-image: linear-gradient(160deg, #7dd3fc 0%, #0284c7 100%);
+  box-shadow: 0 6px 22px rgba(56,189,248,0.35);
+}
+window.look.tint-rose {
+  background-image: radial-gradient(circle at 75% 15%, rgba(251,113,133,0.50), transparent 55%),
+                    linear-gradient(160deg, #4a1525 0%, #6b1d35 55%, #2e0d17 100%);
+}
+window.look.tint-rose button.orb {
+  background-image: linear-gradient(160deg, #fda4af 0%, #f43f5e 55%, #be123c 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(251,113,133,0.50);
+}
+window.look.tint-rose button.act {
+  background-image: linear-gradient(160deg, #fda4af 0%, #e11d48 100%);
+  box-shadow: 0 6px 22px rgba(251,113,133,0.35);
+}
+window.look.tint-amber {
+  background-image: radial-gradient(circle at 75% 15%, rgba(251,191,36,0.50), transparent 55%),
+                    linear-gradient(160deg, #4a3510 0%, #6b4a12 55%, #2e210b 100%);
+}
+window.look.tint-amber button.orb {
+  background-image: linear-gradient(160deg, #fde68a 0%, #f59e0b 55%, #b45309 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(251,191,36,0.50);
+}
+window.look.tint-amber button.act {
+  background-image: linear-gradient(160deg, #fcd34d 0%, #d97706 100%);
+  box-shadow: 0 6px 22px rgba(251,191,36,0.35);
+}
+window.look.tint-violet {
+  background-image: radial-gradient(circle at 75% 15%, rgba(167,139,250,0.50), transparent 55%),
+                    linear-gradient(160deg, #2a1d5e 0%, #3b2a7a 55%, #1a1240 100%);
+}
+window.look.tint-violet button.orb {
+  background-image: linear-gradient(160deg, #c4b5fd 0%, #8b5cf6 55%, #6d28d9 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(167,139,250,0.50);
+}
+window.look.tint-violet button.act {
+  background-image: linear-gradient(160deg, #c4b5fd 0%, #7c3aed 100%);
+  box-shadow: 0 6px 22px rgba(167,139,250,0.35);
+}
+window.look.tint-lime {
+  background-image: radial-gradient(circle at 75% 15%, rgba(163,230,53,0.50), transparent 55%),
+                    linear-gradient(160deg, #22330d 0%, #34501a 55%, #16220a 100%);
+}
+window.look.tint-lime button.orb {
+  background-image: linear-gradient(160deg, #d9f99d 0%, #84cc16 55%, #4d7c0f 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(163,230,53,0.50);
+}
+window.look.tint-lime button.act {
+  background-image: linear-gradient(160deg, #d9f99d 0%, #65a30d 100%);
+  box-shadow: 0 6px 22px rgba(163,230,53,0.35);
+}
+window.look.tint-teal {
+  background-image: radial-gradient(circle at 75% 15%, rgba(45,212,191,0.50), transparent 55%),
+                    linear-gradient(160deg, #10394a 0%, #134e5e 55%, #0c2734 100%);
+}
+window.look.tint-teal button.orb {
+  background-image: linear-gradient(160deg, #5eead4 0%, #14b8a6 55%, #0e7490 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(45,212,191,0.50);
+}
+window.look.tint-teal button.act {
+  background-image: linear-gradient(160deg, #5eead4 0%, #0d9488 100%);
+  box-shadow: 0 6px 22px rgba(45,212,191,0.35);
+}
+window.look.tint-indigo {
+  background-image: radial-gradient(circle at 75% 15%, rgba(99,140,255,0.50), transparent 55%),
+                    linear-gradient(160deg, #1e2659 0%, #2b2f7a 55%, #151a40 100%);
+}
+window.look.tint-indigo button.orb {
+  background-image: linear-gradient(160deg, #a5b4fc 0%, #6366f1 55%, #4338ca 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(99,140,255,0.50);
+}
+window.look.tint-indigo button.act {
+  background-image: linear-gradient(160deg, #a5b4fc 0%, #4f46e5 100%);
+  box-shadow: 0 6px 22px rgba(99,140,255,0.35);
+}
+window.look.tint-slate {
+  background-image: radial-gradient(circle at 75% 15%, rgba(148,163,184,0.50), transparent 55%),
+                    linear-gradient(160deg, #1e293b 0%, #334155 55%, #0f172a 100%);
+}
+window.look.tint-slate button.orb {
+  background-image: linear-gradient(160deg, #cbd5e1 0%, #64748b 55%, #334155 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(148,163,184,0.50);
+}
+window.look.tint-slate button.act {
+  background-image: linear-gradient(160deg, #cbd5e1 0%, #475569 100%);
+  box-shadow: 0 6px 22px rgba(148,163,184,0.35);
+}
+window.look.tint-emerald {
+  background-image: radial-gradient(circle at 75% 15%, rgba(52,211,153,0.50), transparent 55%),
+                    linear-gradient(160deg, #0b3b2e 0%, #065f46 55%, #062a20 100%);
+}
+window.look.tint-emerald button.orb {
+  background-image: linear-gradient(160deg, #6ee7b7 0%, #10b981 55%, #047857 100%);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.10), 0 10px 40px rgba(52,211,153,0.50);
+}
+window.look.tint-emerald button.act {
+  background-image: linear-gradient(160deg, #6ee7b7 0%, #059669 100%);
+  box-shadow: 0 6px 22px rgba(52,211,153,0.35);
+}

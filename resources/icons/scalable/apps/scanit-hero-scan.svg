@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/><stop offset="0.55" stop-color="#0ea5e9"/><stop offset="1" stop-color="#0369a1"/>
+    </linearGradient>
+    <radialGradient id="s" cx="0.35" cy="0.25" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="58" fill="url(#g)"/>
+  <circle cx="64" cy="64" r="58" fill="url(#s)"/>
+  <!-- an open book, a scan line across it -->
+  <path d="M30 42 Q47 36 63 44 L63 90 Q47 82 30 88 Z" fill="#ffffff" fill-opacity="0.95"/>
+  <path d="M98 42 Q81 36 65 44 L65 90 Q81 82 98 88 Z" fill="#ffffff" fill-opacity="0.85"/>
+  <rect x="22" y="62" width="84" height="5" rx="2.5" fill="#e0f2fe"/>
+  <rect x="22" y="62" width="84" height="5" rx="2.5" fill="#38bdf8" fill-opacity="0.6"/>
+</svg>
