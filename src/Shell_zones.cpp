@@ -34,6 +34,7 @@ Gtk::Image* hero(const char* icon, int px) {
 
 void Shell::build_shell() {  // zone: window + header + body
     set_title("Scanit");
+    set_icon_name("io.github.scott8420.Scanit");   // compiled in; installed too
     set_default_size(1060, 780);
 
     auto header = Gtk::make_managed<Gtk::HeaderBar>();

@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# Scanit build. Deps: see the top of CMakeLists.txt (Fedora and Ubuntu package names).
+# build.sh -- configure (first time) and build Scanit into ./build.
+# Incremental: re-run after any change. BUILD_TYPE=Release ./build.sh for an
+# optimised build (install.sh uses Release).
 set -e
 cd "$(dirname "${BASH_SOURCE[0]}")"
-cmake -B build
-cmake --build build -- -j"$(nproc)"
-echo ""
-echo "Built: ./build/scanit  and  ./build/scanit_selftest"
-echo "Smoke: ./build/scanit_selftest"
+BUILD_TYPE="${BUILD_TYPE:-Debug}"
+if [ ! -f build/CMakeCache.txt ] || ! grep -q "CMAKE_BUILD_TYPE:STRING=$BUILD_TYPE" build/CMakeCache.txt; then
+    cmake -S . -B build -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
+fi
+cmake --build build -j"$(nproc)"
+./build/scanit_selftest | tail -1

@@ -94,6 +94,16 @@ What landed:
   a never-scrolling ScrolledWindow that propagates no natural size.
   Reproduced with full-size 2550 x 3508 pages under Xvfb (window 1060 ->
   1169 px wide over 4 pages); after the fix it stays 1060 x 780.
+- **App icon + install** (Scott confirmed the window fix on his machine):
+  `data/io.github.scott8420.Scanit.svg` (glassy round blue badge, open book, scan
+  beam; also compiled in so the window has it uninstalled) and
+  `-symbolic.svg`; `data/...metainfo.xml` (appstreamcli: one warning, no
+  homepage URL). `build.sh` (was missing -- s001's install.sh called it),
+  `install.sh` [--system] builds Release and installs bin, .desktop, both
+  icons, metainfo, and a manifest (`share/scanit/installed.txt`);
+  `uninstall.sh` [--system] removes exactly the manifest. Tested user and
+  system install/uninstall in the sandbox; desktop-file-validate clean.
+  `install-desktop.sh` folded into install.sh and removed.
 - Delivery: one zip of the latest code, the push command pasted in chat
   (Scott: "just the latest code and the push should show so I can copy it").
 - Selftest **188 / 0**. Fake scanner: Book_001..004 continuous, delete 004, rescan -> 004 again; 3 pages 5 s apart then Stop; a

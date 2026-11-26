@@ -13,6 +13,8 @@
 <gresources>
   <gresource prefix="/io/github/scott8420/Scanit/icons/scalable/apps">
     <file preprocess="xml-stripblanks" alias="scanit-logo-symbolic.svg">icons/scalable/apps/scanit-logo-symbolic.svg</file>
+    <!-- The app icon, so the window has it even when Scanit is not installed. -->
+    <file preprocess="xml-stripblanks" alias="io.github.scott8420.Scanit.svg">../data/io.github.scott8420.Scanit.svg</file>
     <!-- The look (Cairn s002): full-colour hero emblems, not symbolic. -->
     <file preprocess="xml-stripblanks" alias="scanit-hero-scan.svg">icons/scalable/apps/scanit-hero-scan.svg</file>
     <file preprocess="xml-stripblanks" alias="scanit-hero-scanner.svg">icons/scalable/apps/scanit-hero-scanner.svg</file>

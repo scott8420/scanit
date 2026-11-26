@@ -52,7 +52,9 @@ sudo dnf install gtkmm4.0-devel spdlog-devel libsoup3-devel avahi-devel cmake gc
 ./build.sh
 ./build/scanit_selftest     # the model, headless
 ./build/scanit
-./install.sh                # ~/.local, app grid entry; --uninstall to remove
+./install.sh                # build (Release) + install for you under ~/.local: app grid entry, icons
+./install.sh --system       # ... or for everyone under /usr/local (sudo)
+./uninstall.sh [--system]   # remove exactly what was installed; your scans stay
 ```
 
 `SCANIT_LOOK=0 ./build/scanit` shows the plain GTK shell instead of the look.

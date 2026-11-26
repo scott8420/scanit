@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <!-- Scanit symbolic: an open book, cut by the scan line -->
+  <path fill="#2e3436" d="M1 3.4 Q4.3 2.4 7.4 3.8 V7.3 H1 Z M15 3.4 Q11.7 2.4 8.6 3.8 V7.3 H15 Z"/>
+  <path fill="#2e3436" d="M1 10.7 H7.4 V13.6 Q4.3 12.2 1 13.2 Z M15 10.7 H8.6 V13.6 Q11.7 12.2 15 13.2 Z"/>
+  <rect fill="#2e3436" x="0" y="8.3" width="16" height="1.4" rx="0.7"/>
+</svg>

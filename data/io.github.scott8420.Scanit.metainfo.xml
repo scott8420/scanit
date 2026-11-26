@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.scott8420.Scanit</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Scanit</name>
+  <summary>Scan whole books on an AirScan flatbed</summary>
+  <description>
+    <p>
+      Scanit drives an AirScan (eSCL) flatbed scanner over the network, with no
+      vendor driver, and is built for scanning whole books page after page.
+    </p>
+    <ul>
+      <li>A quick preview that finds the book, its pages and size, and suggests the crop and type</li>
+      <li>Quick settings: colour, gray or black and white, resolution, corrections</li>
+      <li>Continuous scanning: scan, pause to turn the page, scan again until Stop</li>
+      <li>Rotation, numbered file names, and undo for every choice</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.scott8420.Scanit.desktop</launchable>
+  <developer id="io.github.scott8420">
+    <name>Scott</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.2.0" date="2026-11-25"/>
+  </releases>
+</component>

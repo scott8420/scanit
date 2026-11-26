@@ -79,6 +79,7 @@ add_custom_command(
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/resources"
     DEPENDS "${SCANIT_GRESOURCE_XML}" ${SCANIT_RESOURCE_FILES}
             "${CMAKE_CURRENT_SOURCE_DIR}/resources/look.css"
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/io.github.scott8420.Scanit.svg"
     COMMENT "Compiling gresource bundle (scanit-resources.c)"
     VERBATIM)
 
